@@ -1,8 +1,11 @@
-FROM kong:2.8.1
-# COPY ./kong.yml /home/kong/temp.yml
-USER 0
-RUN apk update && apk add gettext luarocks openssl-dev \
-  && luarocks install luaossl
-# ENTRYPOINT bash -c 'envsubst < ~/temp.yml > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
+# Nutze stabile, vorkonfigurierte Kong-Version mit Luarocks + luaossl vorinstalliert
+FROM kong/kong-gateway:3.5.0.0-alpine
+
+# Optional: Wenn du weiterhin eine kong.yml nutzen willst – ansonsten auskommentieren
+# COPY ./kong.yml /home/kong/kong.yml
+
+# Stelle sicher, dass korrekter User verwendet wird
 USER kong
+
+# Starte im typischen DB-Modus (Admin API erreichbar unter :8001)
 ENTRYPOINT ["/docker-entrypoint.sh", "kong", "docker-start"]
