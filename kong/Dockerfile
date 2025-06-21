@@ -1,5 +1,5 @@
 # Nutze stabile, vorkonfigurierte Kong-Version mit Luarocks + luaossl vorinstalliert
-FROM kong:3.5.0-alpine
+FROM kong:3.5
 
 # Optional: Wenn du weiterhin eine kong.yml nutzen willst – ansonsten auskommentieren
 # COPY ./kong.yml /home/kong/kong.yml
