@@ -5,3 +5,7 @@ RUN apk update && apk add gettext
 USER kong
 # ENTRYPOINT bash -c 'envsubst < ~/temp.yml > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
 ENTRYPOINT ["/docker-entrypoint.sh", "kong", "docker-start"]
+USER 0
+RUN apk update && apk add gettext luarocks openssl-dev \
+  && luarocks install luaossl
+USER kong
