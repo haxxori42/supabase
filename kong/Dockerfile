@@ -8,4 +8,6 @@ FROM kong:3.5
 USER kong
 
 # Starte im typischen DB-Modus (Admin API erreichbar unter :8001)
-ENTRYPOINT ["/docker-entrypoint.sh", "kong", "docker-start"]
+#ENTRYPOINT ["/docker-entrypoint.sh", "kong", "docker-start"]
+
+ENTRYPOINT ["/bin/sh", "-c", "kong migrations bootstrap && /docker-entrypoint.sh kong docker-start"]
