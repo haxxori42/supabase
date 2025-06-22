@@ -8,6 +8,7 @@ FROM kong:3.6
 USER kong
 EXPOSE 8000 8443 8001 8002
 # Starte im typischen DB-Modus (Admin API erreichbar unter :8001)
-ENTRYPOINT ["/docker-entrypoint.sh", "kong", "docker-start"]
 
+# Führt Migration **vor** dem eigentlichen Start durch
+ENTRYPOINT ["/bin/sh", "-c", "kong migrations bootstrap && /docker-entrypoint.sh kong docker-start"]
 #ENTRYPOINT ["/bin/sh", "-c", "kong migrations bootstrap && /docker-entrypoint.sh kong docker-start"]
